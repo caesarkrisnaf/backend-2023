@@ -3,40 +3,42 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use PDO;
 
 class AnimalController extends Controller
 {
     public $animals = [
         ["name" => "panda"],
-        ["name" => "babi"],
+        ["name" => "nyamuk"],
         ["name" => "ayam"]
     ];
 
     # method index - menampilkan data animals
     public function index()
     {
-        foreach($this->animals as $animal){
+        foreach ($this->animals as $animal) {
             echo "Nama Hewan : $animal[name] <br>";
         }
     }
 
-     # method store - menambahkan hewan baru
+    # method store - menambahkan hewan baru
     public function store(Request $request)
     {
-       array_push($this->animals, $request);
-       $this->index();
+        array_push($this->animals, $request);
+        $this->index();
     }
 
+    # method update - mengupdate hewan
     public function update(Request $request, $id)
     {
         $this->animals[$id] = $request;
         $this->index();
     }
+
+    # method destroy - menghapus hewan
     public function destroy($id)
     {
-       # gunakan method unset atau array_splice untuk menghapus data array
-       unset($this->animals[$id]);
-       $this->index();
+        # gunakan method unset atau array_splice untuk menghapus data array
+        unset($this->animals[$id]);
+        $this->index();
     }
 }
