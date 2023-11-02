@@ -5,36 +5,36 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 
-
 class StudentController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 
      */
     public function index()
     {
-		$students = Student::all();
-			
-        if (!empty($students)) {
-			$response = [
-				'message' => 'Menampilkan Data Semua Student',
-				'data' => $students,
-			];
-			return response()->json($response, 200);
-		} else {
-			$response = [
-				'message' => 'Data tidak ada'
-			];
-			return response()->json($response, 200);
-		}
+        # Menggunakan model Student untuk select data
+        $students = Student::all();
+
+        if(!empty($students)){
+            $response = [
+                'message' => 'Menampilkan Data semua Student',
+                'data' => $students,
+            ];
+            return response()->json($response, 200);
+        } else { 
+            $response = [
+                'message' => 'Data tidak ada',
+            ];
+            return response()->json($response,200);
+        }
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -42,45 +42,43 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        	// $input = [
+        // $input = [
 		// 	'nama' => $request->nama,
 		// 	'nim' => $request->nim,
 		// 	'email' => $request->email,
 		// 	'jurusan' => $request->jurusan
 		// ];
 
-		$student = Student::create($request->all());
-
-		$response = [
-			'message' => 'Data Student Berhasil Dibuat',
-			'data' => $student,
-		];
-
-		return response()->json($response, 201);
-	}
-    
+        $student = Student::create($request->all());
+        
+        $response = [
+            'message' => 'Data Student Berhasil dibuat',
+            'data' => $student,
+        ];
+        return response()->json($request,201);
+    }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         $student = Student::find($id);
 
-		if ($student) {
-			$response = [
-				'message' => 'Get detail student',
-				'data' => $student
-			];
-	
-			return response()->json($response, 200);
-		} else {
-			$response = [
-				'message' => 'Data not found'
-			];
-			
-			return response()->json($response, 404);
-		}
+        if ($student) {
+            $response = [
+                'message' => 'Get detail student',
+                'data' => $student
+            ];
+            
+            return response()->json($response, 200);
+        } else {
+            $response = [
+                'message' => 'Data not found'
+            ];
+            
+            return response()->json($response, 404);
+        }
     }
 
     /**
