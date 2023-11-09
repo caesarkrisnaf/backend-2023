@@ -63,6 +63,8 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
+
+	 //tugas pertemuan 6
     public function show(string $id)
     {
         $student = Student::find($id);
