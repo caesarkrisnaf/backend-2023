@@ -42,14 +42,14 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        	// $input = [
-		// 	'nama' => $request->nama,
-		// 	'nim' => $request->nim,
-		// 	'email' => $request->email,
-		// 	'jurusan' => $request->jurusan
-		// ];
+         $input =  $request->validate ([
+		 	'nama' => 'required',
+		 	'nim' => 'numeric|required',
+		 	'email' => 'email|required',
+		 	'jurusan' => 'required'
+		 ]);
 
-		$student = Student::create($request->all());
+		$student = Student::create($input);
 
 		$response = [
 			'message' => 'Data Student Berhasil Dibuat',
